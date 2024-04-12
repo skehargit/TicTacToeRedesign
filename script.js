@@ -10,6 +10,10 @@ let playAgain=document.getElementById('playagain');
 let newMatch=document.getElementById('newMatch');
 let winPop=document.querySelector('.popup');
 let winDisplay=document.querySelector('.winnerDisplay');
+let mainBox=document.querySelector('.mainbox');
+let namingbox=document.querySelector('.namingbox');
+var audio=new Audio('./click-tone.wav');
+
 
 //winning logic for the game 
 const winlgoic=[
@@ -32,6 +36,15 @@ let oPlayerName='oplayer';
 player2.style.display='none';
 slidBox.style.left=0;
 
+function start(){
+    xPlayerName=document.getElementById('pl1').value || 'player1';
+    player1.textContent=xPlayerName;
+    oPlayerName=document.getElementById('pl2').value || 'player2';
+    player2.textContent=oPlayerName;
+    mainBox.style.display='flex';
+    namingbox.style.display='none';
+    audio.play();
+}
 // game starting function
 function newStart(){
     // string values of x,o and draw,
@@ -44,6 +57,7 @@ newStart();
 
 // play again function 
 function playAgainGame(){
+    audio.play();
     boxes.forEach(box=>{
         box.classList.remove('win'); // remove the winning green background from boxes if bg is visible
         box.textContent=""; // make all boxes empty
@@ -54,6 +68,7 @@ function playAgainGame(){
 // adding event listener to all boxes
 boxes.forEach(box=>{
     box.addEventListener('click',()=>{
+        audio.play();
         if(box.textContent==''){
             box.textContent=curPlayer; // current player
             playerChange(); // player change
@@ -64,6 +79,7 @@ boxes.forEach(box=>{
 
 // player change function 
 function playerChange(){
+    audio.play();
     if(curPlayer=='x'){
         curPlayer='o';
         slidBox.style.left='50%';
